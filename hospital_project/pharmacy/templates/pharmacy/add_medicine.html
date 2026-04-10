@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Add Medicine</h2>
+    <a href="{% url 'medicine_list' %}" class="btn btn-secondary">← Back</a>
+</div>
+
+<div class="card p-4 shadow-sm" style="border-radius: 15px; max-width: 600px;">
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Medicine Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Manufacturer</label>
+            {{ form.manufacturer }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            {{ form.price }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            {{ form.quantity }}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Expiry Date</label>
+            {{ form.expiry_date }}
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">
+             Save Medicine
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}

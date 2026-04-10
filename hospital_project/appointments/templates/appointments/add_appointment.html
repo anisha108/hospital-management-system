@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm p-4 rounded-4">
+
+        <h3 class="mb-4">New Appointment</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Patient</label>
+                {{ form.patient }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Doctor</label>
+                {{ form.doctor }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Appointment Type</label>
+                {{ form.appointment_type }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                {{ form.date }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Time</label>
+                {{ form.time }}
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                {{ form.status }}
+            </div>
+
+            <button type="submit" class="btn btn-success rounded-pill px-4">
+                Save Appointment
+            </button>
+
+            <a href="{% url 'appointments' %}" class="btn btn-secondary rounded-pill">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mb-4 fw-semibold">Doctors</h2>
+<style>
+.doctor-link,
+.doctor-link:link,
+.doctor-link:visited,
+.doctor-link:hover,
+.doctor-link:active {
+    text-decoration: none !important;
+    color: black !important;
+    display: block;
+}
+</style>
+<div class="row g-4">
+
+{% for doctor in doctors %}
+<div class="col-md-4">
+
+    <a href="{% url 'toggle_doctor' doctor.id %}" class="doctor-link">
+
+        <div class="doctor-card position-relative">
+    
+            {% if doctor.is_available %}
+            <div class="available-dot"></div>
+            {% endif %}
+    
+            <div class="d-flex align-items-center mb-3">
+                <div class="avatar me-3">
+                    {{ doctor.name|slice:":1" }}
+                </div>
+    
+                <div>
+                    <h5 class="mb-0 fw-semibold">{{ doctor.name }}</h5>
+                    <small class="text-muted">{{ doctor.specialty }}</small>
+                </div>
+            </div>
+    
+            <div class="d-flex gap-3 text-muted mb-3">
+                <span>⭐ {{ doctor.rating }}</span>
+                <span>👥 {{ doctor.patients_count }} patients</span>
+                <span>⏳ {{ doctor.experience_years }}y exp</span>
+            </div>
+    
+            {% if doctor.is_available %}
+            <span class="badge-available">Available</span>
+            {% else %}
+            <span class="badge-unavailable">Unavailable</span>
+            {% endif %}
+    
+        </div>
+    
+    </a>
+
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Patients</h2>
+    
+    <!-- Add Button -->
+    <a href="{% url 'add_patient' %}" class="btn btn-success">
+        + Add Patient
+    </a>
+</div>
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        
+
+        <form method="GET" class="d-flex" style="width: 300px;">
+            <input 
+                type="text" 
+                name="q" 
+                value="{{ query|default:'' }}" 
+                class="form-control me-2" 
+                placeholder="Search by name..."
+            >
+            <button type="submit" class="btn btn-primary">
+                Search
+            </button>
+        </form>
+    </div>
+<!-- Table Card -->
+<div class="card shadow-sm rounded-4">
+    <div class="card-body p-0">
+   
+   <table class="table mb-0">
+   <thead class="table-light">
+   <tr>
+   <th>ID</th>
+   <th>Patient</th>
+   <th>Age</th>
+   <th>Status</th>
+   </tr>
+   </thead>
+   
+   <tbody>
+    {% for patient in patients %}
+   <tr>
+   
+   <td>P{{ patient.id|stringformat:"03d" }}</td>
+   
+   <td>
+   <div class="d-flex align-items-center">
+   <div class="avatar me-3">
+    {{ patient.name|slice:":1" }}
+   </div>
+    {{ patient.name }}
+   </div>
+   </td>
+   
+   <td>
+    {{ patient.age }}
+   </td>
+   
+   <td>
+    {% if patient.status == "Admitted" %}
+   <span class="badge bg-primary">Admitted</span>
+    {% elif patient.status == "Critical" %}
+   <span class="badge bg-danger">Critical</span>
+    {% elif patient.status == "Outpatient" %}
+   <span class="badge bg-warning text-dark">Outpatient</span>
+    {% elif patient.status == "Discharged" %}
+   <span class="badge bg-success">Discharged</span>
+    {% endif %}
+   </td>
+   
+   </tr>
+   
+    {% empty %}
+   <tr>
+   <td colspan="4" class="text-center py-4 text-muted">
+    No patients found.
+   </td>
+   </tr>
+    {% endfor %}
+   
+   </tbody>
+   </table>
+   
+    </div>
+   </div>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

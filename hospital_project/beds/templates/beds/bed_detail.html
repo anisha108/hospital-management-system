@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Room {{ bed.bed_number }}</h3>
+
+<form method="post">
+{% csrf_token %}
+
+<label>Status:</label>
+<select name="status" class="form-control mb-3">
+    <option {% if bed.status == "Available" %}selected{% endif %}>Available</option>
+    <option {% if bed.status == "Occupied" %}selected{% endif %}>Occupied</option>
+    <option {% if bed.status == "Reserved" %}selected{% endif %}>Reserved</option>
+</select>
+
+<label>Assign Patient:</label>
+<select name="patient" class="form-control mb-3">
+    <option value="">-- None --</option>
+    {% for p in patients %}
+    <option value="{{ p.id }}">{{ p.name }}</option>
+    {% endfor %}
+</select>
+
+<button class="btn btn-primary">Save</button>
+
+</form>
+
+{% endblock %}

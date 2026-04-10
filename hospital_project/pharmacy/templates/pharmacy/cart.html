@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Cart & Billing</h2>
+
+<table class="table">
+    <tr>
+        <th>Medicine</th>
+        <th>Qty</th>
+        <th>Price</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item.medicine.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹{{ item.medicine.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h4>Subtotal: ₹{{ total }}</h4>
+<h4>Tax (8%): ₹{{ tax }}</h4>
+<h3>Total: ₹{{ final_total }}</h3>
+
+{% endblock %}
